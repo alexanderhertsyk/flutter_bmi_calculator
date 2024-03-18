@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'constants.dart';
 
-class IconCard extends StatelessWidget {
-  const IconCard({required this.icon, required this.title, super.key});
+class IconContent extends StatelessWidget {
+  const IconContent({required this.icon, required this.title, super.key});
 
   final IconData icon;
   final String title;

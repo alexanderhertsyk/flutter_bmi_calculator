@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'constants.dart';
-import 'icon_card.dart';
+import 'counter_content.dart';
+import 'icon_content.dart';
 import 'reusable_card.dart';
-import 'round_icon_button.dart';
 
 enum Gender { male, female }
 
@@ -16,7 +16,7 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Gender? _selectedGender;
+  Gender? _gender;
   int _height = 175;
   int _weight = 70;
   int _age = 25;
@@ -35,27 +35,26 @@ class _InputPageState extends State<InputPage> {
               children: [
                 Expanded(
                   child: ReusableCard(
-                    color: _selectedGender == Gender.male
+                    color: _gender == Gender.male
                         ? kActiveCardColor
                         : kInactiveCardColor,
-                    child: const IconCard(
+                    child: const IconContent(
                       icon: FontAwesomeIcons.mars,
                       title: 'MALE',
                     ),
-                    onTap: () => setState(() => _selectedGender = Gender.male),
+                    onTap: () => setState(() => _gender = Gender.male),
                   ),
                 ),
                 Expanded(
                   child: ReusableCard(
-                    color: _selectedGender == Gender.female
+                    color: _gender == Gender.female
                         ? kActiveCardColor
                         : kInactiveCardColor,
-                    child: const IconCard(
+                    child: const IconContent(
                       icon: FontAwesomeIcons.venus,
                       title: 'FEMALE',
                     ),
-                    onTap: () =>
-                        setState(() => _selectedGender = Gender.female),
+                    onTap: () => setState(() => _gender = Gender.female),
                   ),
                 ),
               ],
@@ -116,68 +115,25 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                     child: ReusableCard(
                   color: kActiveCardColor,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'WEIGHT',
-                        style: kLabelTextStyle,
-                      ),
-                      Text(
-                        _weight.toString(),
-                        style: kNumberTextStyle,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          RoundIconButton(
-                            FontAwesomeIcons.minus,
-                            press: () =>
-                                _weight > 30 ? setState(() => _weight--) : null,
-                          ),
-                          const SizedBox(width: 10.0),
-                          RoundIconButton(
-                            FontAwesomeIcons.plus,
-                            press: () => _weight < 300
-                                ? setState(() => _weight++)
-                                : null,
-                          ),
-                        ],
-                      )
-                    ],
+                  child: CounterContent(
+                    title: 'WEIGHT',
+                    value: _weight,
+                    onSubstractPressed: () =>
+                        _weight > 40 ? setState(() => _weight--) : null,
+                    onAddPressed: () =>
+                        _weight < 200 ? setState(() => _weight++) : null,
                   ),
                 )),
                 Expanded(
                   child: ReusableCard(
                     color: kActiveCardColor,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'AGE',
-                          style: kLabelTextStyle,
-                        ),
-                        Text(
-                          _age.toString(),
-                          style: kNumberTextStyle,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            RoundIconButton(
-                              FontAwesomeIcons.minus,
-                              press: () =>
-                                  _age > 0 ? setState(() => _age--) : null,
-                            ),
-                            const SizedBox(width: 10.0),
-                            RoundIconButton(
-                              FontAwesomeIcons.plus,
-                              press: () =>
-                                  _age < 130 ? setState(() => _age++) : null,
-                            ),
-                          ],
-                        )
-                      ],
+                    child: CounterContent(
+                      title: 'AGE',
+                      value: _age,
+                      onSubstractPressed: () =>
+                          _age > 0 ? setState(() => _age--) : null,
+                      onAddPressed: () =>
+                          _age < 130 ? setState(() => _age++) : null,
                     ),
                   ),
                 ),

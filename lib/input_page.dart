@@ -1,3 +1,6 @@
+import 'package:bmi_calculator/bmi_calculator.dart';
+import 'package:bmi_calculator/bottom_button.dart';
+import 'package:bmi_calculator/results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -15,11 +18,48 @@ class InputPage extends StatefulWidget {
   State<InputPage> createState() => _InputPageState();
 }
 
-class _InputPageState extends State<InputPage> {
+class _InputPageState extends State<InputPage> with WidgetsBindingObserver {
   Gender? _gender;
-  int _height = 175;
-  int _weight = 70;
-  int _age = 25;
+  late int _height;
+  late int _weight;
+  late int _age;
+
+  Future<void> calculate() async {
+    var results = BmiCalculator.calculate(_gender!, _height, _weight, _age);
+
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return ResultsPage(results);
+      }),
+    );
+
+    if (!context.mounted) return;
+
+    reset();
+  }
+
+  void reset() => setState(() {
+        _gender = null;
+        _height = 175;
+        _weight = 70;
+        _age = 25;
+      });
+
+  @override
+  void initState() {
+    super.initState();
+
+    reset();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    print('----------------------------------------------------------');
+    print(state.toString());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -140,14 +180,19 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            width: double.infinity,
-            height: kBottomContainerHeight,
-            color: kBottomContainerColor,
-            margin: const EdgeInsets.only(top: 10.0),
-          )
+          BottomButton(
+            title: 'CALCULATE',
+            onTap: () => _gender != null ? calculate() : null,
+          ),
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+
+    super.dispose();
   }
 }

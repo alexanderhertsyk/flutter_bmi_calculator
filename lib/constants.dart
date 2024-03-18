@@ -6,7 +6,7 @@ const kBottomContainerHeight = 80.0;
 const kSliderInactiveColor = Color(0xFF8D8E98);
 const kButtonBackgroundColor = Color(0xFF4C4F5E);
 const kBottomContainerColor = Color(0xFFEB1555);
-const kResultLabelColor = Color(0xFF2FCE6F);
+const kResultLabelColor = Color(0xFF24D876);
 
 const kLabelTextStyle = TextStyle(
   fontSize: 18.0,
@@ -29,9 +29,9 @@ const kHugeButtonTextStyle = TextStyle(
 );
 
 const kResultInfoTextStyle = TextStyle(
-  fontSize: 22.0,
   color: kResultLabelColor,
-  fontWeight: FontWeight.w600,
+  fontSize: 22.0,
+  fontWeight: FontWeight.bold,
 );
 
 const kResultValueTextStyle = TextStyle(

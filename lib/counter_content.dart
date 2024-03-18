@@ -40,7 +40,7 @@ class CounterContent extends StatelessWidget {
             const SizedBox(width: 10.0),
             RoundIconButton(
               FontAwesomeIcons.plus,
-              onPressed: onSubstractPressed,
+              onPressed: onAddPressed,
             ),
           ],
         )

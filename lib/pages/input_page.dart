@@ -1,15 +1,14 @@
 import 'package:bmi_calculator/bmi_calculator.dart';
-import 'package:bmi_calculator/bottom_button.dart';
-import 'package:bmi_calculator/results_page.dart';
+import 'package:bmi_calculator/widgets/bottom_button.dart';
+import 'package:bmi_calculator/pages/results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'constants.dart';
-import 'counter_content.dart';
-import 'icon_content.dart';
-import 'reusable_card.dart';
-
-enum Gender { male, female }
+import '../constants.dart';
+import '../enums/gender.dart';
+import '../widgets/counter_content.dart';
+import '../widgets/icon_content.dart';
+import '../widgets/reusable_card.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
